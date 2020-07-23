@@ -23,7 +23,7 @@ public class RideController {
 	private RideValidator rideValidator;
 	
 	
-	//calledByDriver to give Customer rating
+	//calledByDriver to give rating to customer 
 	@PutMapping("/ride/customer-rating")
 	public void customerRating(@RequestBody @Valid RatingRequestBean customerRatingRequestBean, Errors errors) {
 		rideValidator.validateOnCustomerRatingUpdate(customerRatingRequestBean, errors);
@@ -33,7 +33,7 @@ public class RideController {
 		rideService.updateCustomerRating(customerRatingRequestBean);
 	}
 	
-	//calledByCustomer to give Driver rating
+	//calledByCustomer to give rating to driver 
 	@PutMapping("/ride/driver-rating")
 	public void driverRating(@RequestBody @Valid RatingRequestBean driverRatingRequestBean, Errors errors) {
 		rideValidator.validateOnDriverRatingUpdate(driverRatingRequestBean, errors);
