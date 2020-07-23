@@ -38,6 +38,7 @@ public class RideServiceImpl implements RideService{
 	public void updateCustomerRating(RatingRequestBean customerRatingRequestBean) {
 		RideEntity rideEntity = findByRideId(customerRatingRequestBean.getRideId()); 
 		rideEntity.setCustomerRating(customerRatingRequestBean.getRating());
+		//Async call to update Customer Aggregated Rating to reduce latency
 		CompletableFuture.runAsync(() -> {
 			ratingUpdate(rideEntity.getCustomerID(), 0, customerRatingRequestBean.getRating());
 		});
@@ -48,6 +49,7 @@ public class RideServiceImpl implements RideService{
 	public void updateDriverRating(RatingRequestBean driverRatingRequestBean) {
 		RideEntity rideEntity = findByRideId(driverRatingRequestBean.getRideId()); 
 		rideEntity.setDriverRating(driverRatingRequestBean.getRating());
+		//Async call to update Driver Aggregated Rating to reduce latency
 		CompletableFuture.runAsync(() -> {
 			ratingUpdate(rideEntity.getDriverId(), 1, driverRatingRequestBean.getRating());
 		});
